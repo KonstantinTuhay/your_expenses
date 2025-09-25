@@ -1,4 +1,5 @@
 import ExpensesServices from "../helpers/expensesServices.mjs";
+import { validationResult } from "express-validator";
 
 class ExpensesControllers {
   async getYears(req, res) {
@@ -15,6 +16,11 @@ class ExpensesControllers {
   }
 
   async getExpenses(req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
     try {
       const { year, month } = req.query;
 
@@ -37,6 +43,10 @@ class ExpensesControllers {
   }
 
   async addExpense(req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
     try {
       const { dateExpnese, expenseCategory, description, price } = req.body;
 
@@ -58,6 +68,10 @@ class ExpensesControllers {
   }
 
   async deleteExpense(req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
     try {
       const { id, year, month, date } = req.query;
 

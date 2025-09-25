@@ -1,5 +1,10 @@
 import express from "express";
 import ExpensesControllers from "../controllers/ExpensesControllers.mjs";
+import {
+  validateData,
+  validateDeleteRequest,
+  validateBody,
+} from "../validators/expensesValidator.mjs";
 
 const router = express.Router();
 
@@ -7,12 +12,17 @@ const router = express.Router();
 router.get("/getYears", ExpensesControllers.getYears);
 
 // GET /api/getExpenses?year=2025&month={month}
-router.get("/getExpenses", ExpensesControllers.getExpenses);
+router.get("/getExpenses", validateData, ExpensesControllers.getExpenses);
 
 // POST /api/addExpense
-router.post("/addExpense", ExpensesControllers.addExpense);
+router.post("/addExpense", validateBody, ExpensesControllers.addExpense);
 
 // DELETE /api/deleteExpense?id={id}&year=2025&month={month}&date={date}
-router.delete("/deleteExpense", ExpensesControllers.deleteExpense);
+router.delete(
+  "/deleteExpense",
+  validateDeleteRequest,
+  validateData,
+  ExpensesControllers.deleteExpense
+);
 
 export default router;
