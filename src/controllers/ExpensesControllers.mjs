@@ -50,6 +50,7 @@ class ExpensesControllers {
 
       // Отправляем, что всё добавлено
       res.json("Добавлено!");
+      // res.status(200);
     } catch (error) {
       console.error("Ошибка при добавлении расхода:", error);
       res.status(500).json({ error: "Внутренняя ошибка сервера" });
