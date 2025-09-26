@@ -16,7 +16,7 @@ const isDateValid = (value) => {
   return false;
 };
 
-const isValidateString = (value) => {
+export const isValidateString = (value) => {
   if (typeof value === "string") {
     return true;
   }
