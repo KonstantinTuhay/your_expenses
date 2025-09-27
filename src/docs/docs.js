@@ -1,7 +1,7 @@
 // POST /api/expenses/login
 
 /**
- * @swagger
+ * @openapi
  * /api/expenses/login:
  *    post:
  *      summary: Логин пользователя
@@ -36,7 +36,7 @@
 // POST /api/expenses/register
 
 /**
- * @swagger
+ * @openapi
  * /api/expenses/register:
  *    post:
  *      summary: Зарегистрировать пользователя
@@ -75,7 +75,7 @@
 // GET /api/expenses/getYears
 
 /**
- * @swagger
+ * @openapi
  * /api/expenses/getYears:
  *    get:
  *      summary: Получить годы
@@ -90,7 +90,7 @@
 // GET /api/expenses/getExpenses?year=2025&month={month}
 
 /**
- * @swagger
+ * @openapi
  * /api/expenses/getExpenses:
  *   get:
  *     summary: Получить расходы
@@ -120,7 +120,7 @@
 // POST /api/expenses/addExpense
 
 /**
- * @swagger
+ * @openapi
  * /api/expenses/addExpense:
  *   post:
  *     summary: Добавить расход
@@ -163,7 +163,7 @@
 // DELETE /api/expenses/deleteExpense?id={id}&year=2025&month={month}&date={date}
 
 /**
- * @swagger
+ * @openapi
  * /api/expenses/deleteExpense:
  *   delete:
  *     summary: Удлаить расход

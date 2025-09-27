@@ -23,7 +23,7 @@ const router = express.Router();
 // POST /api/expenses/login
 
 /**
- * @openapi
+ * @swagger
  * /api/expenses/login:
  *    post:
  *      summary: Логин пользователя
@@ -51,7 +51,7 @@ const router = express.Router();
  *                 description: email пользователя
  *               password:
  *                 type: string
- *                 example: ******
+ *                 example: 12345
  *                 description: Пароль пользователя
  */
 
@@ -60,7 +60,7 @@ router.post("/login", validateEmail, validatePassword, UsersControllers.login);
 // POST /api/expenses/register
 
 /**
- * @openapi
+ * @swagger
  * /api/expenses/register:
  *    post:
  *      summary: Зарегистрировать пользователя
@@ -88,7 +88,7 @@ router.post("/login", validateEmail, validatePassword, UsersControllers.login);
  *                 description: email пользователя
  *               password:
  *                 type: string
- *                 example: ******
+ *                 example: 123456
  *                 description: Пароль пользователя
  *               firstName:
  *                 type: string
@@ -107,10 +107,10 @@ router.post(
 // GET /api/expenses/getYears
 
 /**
- * @openapi
+ * @swagger
  * /api/expenses/getYears:
  *    get:
- *      summary: Получить годы
+ *      summary: Получить года
  *      description: Получить годы которые пользователь вносил расходы
  *      tags:
  *        - Expenses
@@ -124,7 +124,7 @@ router.get("/getYears", authenticateToken, ExpensesControllers.getYears);
 // GET /api/expenses/getExpenses?year=2025&month={month}
 
 /**
- * @openapi
+ * @swagger
  * /api/expenses/getExpenses:
  *   get:
  *     summary: Получить расходы
@@ -156,13 +156,13 @@ router.get("/getExpenses", validateData, ExpensesControllers.getExpenses);
 // POST /api/expenses/addExpense
 
 /**
- * @openapi
+ * @swagger
  * /api/expenses/addExpense:
- *   post:
- *     summary: Добавить расход
- *     description: Добавить расход
- *     tags:
- *       - Expenses
+ *    post:
+ *      summary: Добавить расход
+ *      description: Добавить расход
+ *      tags:
+ *        - Expenses
  *      requestBody:
  *        $ref: "#/components/requestBodies/Expenses"
  *      responses:
@@ -201,18 +201,13 @@ router.post("/addExpense", validateBody, ExpensesControllers.addExpense);
 // DELETE /api/expenses/deleteExpense?id={id}&year=2025&month={month}&date={date}
 
 /**
- * @openapi
- * /api/expenses/deleteExpense:
- *   delete:
- *     summary: Удлаить расход
- *     description: Удалить расход
- *     tags:
- *       - Expenses
- *      requestBody:
- *        $ref: "#/components/requestBodies/Expenses"
- *      responses:
- *        200:
- *          description: Расход удалён!
+ * @swagger
+ * /api/todos/{id}:
+ *    delete:
+ *      summary: Удалить расход
+ *      description: Удалить расход
+ *      tags:
+ *        - Expenses
  * components:
  *   requestBodies:
  *     Expenses:
