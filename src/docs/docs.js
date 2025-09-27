@@ -1,25 +1,3 @@
-import express from "express";
-
-import ExpensesControllers from "../controllers/ExpensesControllers.mjs";
-import UsersControllers from "../controllers/UsersControllers.mjs";
-import { authenticateToken } from "../middleware/authenticateToken.mjs";
-
-import {
-  validateData,
-  validateDeleteRequest,
-  validateBody,
-} from "../validators/expensesValidator.mjs";
-
-import {
-  validateEmail,
-  validatePassword,
-  validateFirstName,
-  validateRegister,
-  validateLogin,
-} from "../validators/authValidate.mjs";
-
-const router = express.Router();
-
 // POST /api/expenses/login
 
 /**
@@ -34,7 +12,7 @@ const router = express.Router();
  *        $ref: "#/components/requestBodies/Users"
  *      responses:
  *        200:
- *          description: Успешный вход
+ *          description: Таска успешно создана
  * components:
  *   requestBodies:
  *     Users:
@@ -54,8 +32,6 @@ const router = express.Router();
  *                 example: ******
  *                 description: Пароль пользователя
  */
-
-router.post("/login", validateEmail, validatePassword, UsersControllers.login);
 
 // POST /api/expenses/register
 
@@ -96,14 +72,6 @@ router.post("/login", validateEmail, validatePassword, UsersControllers.login);
  *                 description: Имя пользователя
  */
 
-router.post(
-  "/register",
-  validateEmail,
-  validatePassword,
-  validateFirstName,
-  UsersControllers.register
-);
-
 // GET /api/expenses/getYears
 
 /**
@@ -118,8 +86,6 @@ router.post(
  *        200:
  *          description: Успех
  */
-
-router.get("/getYears", authenticateToken, ExpensesControllers.getYears);
 
 // GET /api/expenses/getExpenses?year=2025&month={month}
 
@@ -150,8 +116,6 @@ router.get("/getYears", authenticateToken, ExpensesControllers.getYears);
  *       200:
  *         description: Успех
  */
-
-router.get("/getExpenses", validateData, ExpensesControllers.getExpenses);
 
 // POST /api/expenses/addExpense
 
@@ -196,8 +160,6 @@ router.get("/getExpenses", validateData, ExpensesControllers.getExpenses);
  *                 description: Цена
  */
 
-router.post("/addExpense", validateBody, ExpensesControllers.addExpense);
-
 // DELETE /api/expenses/deleteExpense?id={id}&year=2025&month={month}&date={date}
 
 /**
@@ -240,12 +202,3 @@ router.post("/addExpense", validateBody, ExpensesControllers.addExpense);
  *                 example: 25.09
  *                 description: Дата
  */
-
-router.delete(
-  "/deleteExpense",
-  validateDeleteRequest,
-  validateData,
-  ExpensesControllers.deleteExpense
-);
-
-export default router;
