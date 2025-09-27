@@ -23,7 +23,7 @@ const router = express.Router();
 // POST /api/expenses/login
 
 /**
- * @swagger
+ * @openapi
  * /api/expenses/login:
  *    post:
  *      summary: Логин пользователя
@@ -60,7 +60,7 @@ router.post("/login", validateEmail, validatePassword, UsersControllers.login);
 // POST /api/expenses/register
 
 /**
- * @swagger
+ * @openapi
  * /api/expenses/register:
  *    post:
  *      summary: Зарегистрировать пользователя
@@ -107,7 +107,7 @@ router.post(
 // GET /api/expenses/getYears
 
 /**
- * @swagger
+ * @openapi
  * /api/expenses/getYears:
  *    get:
  *      summary: Получить годы
@@ -124,7 +124,7 @@ router.get("/getYears", authenticateToken, ExpensesControllers.getYears);
 // GET /api/expenses/getExpenses?year=2025&month={month}
 
 /**
- * @swagger
+ * @openapi
  * /api/expenses/getExpenses:
  *   get:
  *     summary: Получить расходы
@@ -156,7 +156,7 @@ router.get("/getExpenses", validateData, ExpensesControllers.getExpenses);
 // POST /api/expenses/addExpense
 
 /**
- * @swagger
+ * @openapi
  * /api/expenses/addExpense:
  *   post:
  *     summary: Добавить расход
@@ -201,7 +201,7 @@ router.post("/addExpense", validateBody, ExpensesControllers.addExpense);
 // DELETE /api/expenses/deleteExpense?id={id}&year=2025&month={month}&date={date}
 
 /**
- * @swagger
+ * @openapi
  * /api/expenses/deleteExpense:
  *   delete:
  *     summary: Удлаить расход
