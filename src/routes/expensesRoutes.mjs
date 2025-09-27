@@ -21,10 +21,16 @@ import {
 const router = express.Router();
 
 // POST /api/expenses/login
-router.post("/login", validateLogin, UsersControllers.login);
+router.post("/login", validateEmail, validatePassword, UsersControllers.login);
 
 // POST /api/expenses/register
-router.post("/register", validateRegister, UsersControllers.register);
+router.post(
+  "/register",
+  validateEmail,
+  validatePassword,
+  validateFirstName,
+  UsersControllers.register
+);
 
 // GET /api/expenses/getYears
 router.get("/getYears", authenticateToken, ExpensesControllers.getYears);

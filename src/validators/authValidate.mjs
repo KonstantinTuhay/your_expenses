@@ -4,7 +4,9 @@ import { isValidateString } from "./expensesValidator.mjs";
 export const validateEmail = [
   body("email").isEmail().withMessage("Неверный имейл!"),
 ];
-export const validatePassword = [body("password").isLength({ min: 6 })];
+export const validatePassword = [
+  body("password").isLength({ min: 3 }).withMessage("Неверный пароль"),
+];
 export const validateFirstName = [
   body("firstName")
     .custom(isValidateString)

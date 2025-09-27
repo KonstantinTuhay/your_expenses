@@ -1,1 +1,8 @@
-[{"id":"UOARvnlrlaQAdK9w06BfD","firstName":"Konstantin","email":"tuhai-k@mail.ru","password":"$2b$10$gVzrx4WIwh1F.6ZdUoxep.n34YH6iFRLV8wQl1Gl8GwhXqFMsKW6q"},{"id":"ysnoLtHVzlPUUyBi3YFA_","firstName":"Konstantin","email":"tuhai-kmail.ru","password":"$2b$10$E7W1eZhVl3uywhYsZ.Z0GOzySwTRh/o8olv5cntm46lyEu4SqCtwm"}]
+[
+  {
+    "id": "UOARvnlrlaQAdK9w06BfD",
+    "firstName": "Konstantin",
+    "email": "tuhai-k@mail.ru",
+    "password": "$2b$10$gVzrx4WIwh1F.6ZdUoxep.n34YH6iFRLV8wQl1Gl8GwhXqFMsKW6q"
+  }
+]
