@@ -1,5 +1,6 @@
 import ExpensesServices from "../helpers/expensesServices.mjs";
 import { validationResult } from "express-validator";
+import * as Sentry from "@sentry/node";
 
 class ExpensesControllers {
   async getYears(req, res) {
@@ -10,6 +11,7 @@ class ExpensesControllers {
       // Возвращаем массив строк (года)
       res.json(getYears);
     } catch (error) {
+      Sentry.captureException(error);
       console.error("Ошибка при получении годов:", error);
       res.status(500).json({ error: "Внутренняя ошибка сервера" });
     }
@@ -37,6 +39,7 @@ class ExpensesControllers {
       // Возвращаем массив объектов
       res.json(result);
     } catch (error) {
+      Sentry.captureException(error);
       console.error("Ошибка при получении расходов:", error);
       res.status(500).json({ error: "Внутренняя ошибка сервера" });
     }
@@ -62,6 +65,7 @@ class ExpensesControllers {
       res.json("Добавлено!");
       // res.status(200);
     } catch (error) {
+      Sentry.captureException(error);
       console.error("Ошибка при добавлении расхода:", error);
       res.status(500).json({ error: "Внутренняя ошибка сервера" });
     }
@@ -79,6 +83,7 @@ class ExpensesControllers {
 
       res.json("Удалили!");
     } catch (error) {
+      Sentry.captureException(error);
       console.error("Ошибка при удалении расхода:", error);
       res.status(500).json({ error: "Внутренняя ошибка сервера" });
     }

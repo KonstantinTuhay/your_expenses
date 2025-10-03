@@ -1,7 +1,6 @@
 import express from "express";
 
 import ExpensesControllers from "../controllers/ExpensesControllers.mjs";
-import UsersControllers from "../controllers/UsersControllers.mjs";
 import { authenticateToken } from "../middleware/authenticateToken.mjs";
 
 import {
@@ -10,99 +9,7 @@ import {
   validateBody,
 } from "../validators/expensesValidator.mjs";
 
-import {
-  validateEmail,
-  validatePassword,
-  validateFirstName,
-  validateRegister,
-  validateLogin,
-} from "../validators/authValidate.mjs";
-
 const router = express.Router();
-
-// POST /api/expenses/login
-
-/**
- * @swagger
- * /api/expenses/login:
- *    post:
- *      summary: Логин пользователя
- *      description: Чтобы залогиниться пользователю
- *      tags:
- *        - Users
- *      requestBody:
- *        $ref: "#/components/requestBodies/Users"
- *      responses:
- *        200:
- *          description: Успешный вход
- * components:
- *   requestBodies:
- *     Users:
- *       description: Все возможности для пользователей.
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               email:
- *                 type: string
- *                 example: example@mail.ru
- *                 description: email пользователя
- *               password:
- *                 type: string
- *                 example: 12345
- *                 description: Пароль пользователя
- */
-
-router.post("/login", validateEmail, validatePassword, UsersControllers.login);
-
-// POST /api/expenses/register
-
-/**
- * @swagger
- * /api/expenses/register:
- *    post:
- *      summary: Зарегистрировать пользователя
- *      description: Регистрация пользователя
- *      tags:
- *        - Users
- *      requestBody:
- *        $ref: "#/components/requestBodies/Users"
- *      responses:
- *        200:
- *          description: Пользователь зарегистрирован
- * components:
- *   requestBodies:
- *     Users:
- *       description: Регистрация пользователя
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               email:
- *                 type: string
- *                 example: example@mail.ru
- *                 description: email пользователя
- *               password:
- *                 type: string
- *                 example: 123456
- *                 description: Пароль пользователя
- *               firstName:
- *                 type: string
- *                 example: Андрей
- *                 description: Имя пользователя
- */
-
-router.post(
-  "/register",
-  validateEmail,
-  validatePassword,
-  validateFirstName,
-  UsersControllers.register
-);
 
 // GET /api/expenses/getYears
 
@@ -114,6 +21,8 @@ router.post(
  *      description: Получить годы которые пользователь вносил расходы
  *      tags:
  *        - Expenses
+ *      security:
+ *       - bearerAuth: []
  *      responses:
  *        200:
  *          description: Успех
@@ -131,6 +40,8 @@ router.get("/getYears", authenticateToken, ExpensesControllers.getYears);
  *     description: Получить расходы по году и месяцу
  *     tags:
  *       - Expenses
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: query
  *         name: year
@@ -151,7 +62,12 @@ router.get("/getYears", authenticateToken, ExpensesControllers.getYears);
  *         description: Успех
  */
 
-router.get("/getExpenses", validateData, ExpensesControllers.getExpenses);
+router.get(
+  "/getExpenses",
+  authenticateToken,
+  validateData,
+  ExpensesControllers.getExpenses
+);
 
 // POST /api/expenses/addExpense
 
@@ -163,14 +79,16 @@ router.get("/getExpenses", validateData, ExpensesControllers.getExpenses);
  *      description: Добавить расход
  *      tags:
  *        - Expenses
+ *      security:
+ *       - bearerAuth: []
  *      requestBody:
- *        $ref: "#/components/requestBodies/Expenses"
+ *        $ref: "#/components/requestBodies/ExpensesaddExpense"
  *      responses:
  *        200:
  *          description: Расход добавлен!
  * components:
  *   requestBodies:
- *     Expenses:
+ *     ExpensesaddExpense:
  *       description: Добавление расхода
  *       required: true
  *       content:
@@ -180,7 +98,7 @@ router.get("/getExpenses", validateData, ExpensesControllers.getExpenses);
  *             properties:
  *               dateExpnese:
  *                 type: string
- *                 example: 25.09
+ *                 example: 25.09.2025
  *                 description: Дата расхода
  *               expenseCategory:
  *                 type: string
@@ -196,48 +114,66 @@ router.get("/getExpenses", validateData, ExpensesControllers.getExpenses);
  *                 description: Цена
  */
 
-router.post("/addExpense", validateBody, ExpensesControllers.addExpense);
+router.post(
+  "/addExpense",
+  authenticateToken,
+  validateBody,
+  ExpensesControllers.addExpense
+);
 
 // DELETE /api/expenses/deleteExpense?id={id}&year=2025&month={month}&date={date}
 
 /**
  * @swagger
- * /api/todos/{id}:
+ * /api/expenses/deleteExpense:
  *    delete:
  *      summary: Удалить расход
  *      description: Удалить расход
  *      tags:
  *        - Expenses
- * components:
- *   requestBodies:
- *     Expenses:
- *       description: Удаление расхода
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               id:
- *                 type: string
- *                 example: 12321312321
- *                 description: id
- *               year:
- *                 type: string
- *                 example: 2025
- *                 description: Год
- *               month:
- *                 type: string
- *                 example: Сентябрь
- *                 description: Месяц
- *               date:
- *                 type: string
- *                 example: 25.09
- *                 description: Дата
+ *      security:
+ *       - bearerAuth: []
+ *      parameters:
+ *       - in: query
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         example: 13rresfd5trrg345tsfd
+ *         description: id расхода
+ *       - in: query
+ *         name: year
+ *         required: true
+ *         schema:
+ *           type: string
+ *         example: 2025
+ *         description: год расхода
+ *       - in: query
+ *         name: month
+ *         required: true
+ *         schema:
+ *           type: string
+ *         example: Сентябрь
+ *         description: месяц расхода
+ *       - in: query
+ *         name: date
+ *         required: true
+ *         schema:
+ *           type: string
+ *         example: 25.09
+ *         description: день расхода
+ *      responses:
+ *        200:
+ *          description: Успешное удаление таски
+ *        404:
+ *          description: Таска с указанным идентификатором не найдена.
+ *        500:
+ *          description: Внутренняя ошибка сервера. Пожалуйста, попробуйте повторить запрос позже.
  */
 
 router.delete(
   "/deleteExpense",
+  authenticateToken,
   validateDeleteRequest,
   validateData,
   ExpensesControllers.deleteExpense

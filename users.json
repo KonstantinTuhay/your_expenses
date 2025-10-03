@@ -4,5 +4,11 @@
     "firstName": "Konstantin",
     "email": "tuhai-k@mail.ru",
     "password": "$2b$10$gVzrx4WIwh1F.6ZdUoxep.n34YH6iFRLV8wQl1Gl8GwhXqFMsKW6q"
+  },
+  {
+    "id": "tRTDqCVnMqK2RO6gIGog0",
+    "firstName": "Pasha",
+    "email": "pasha@mail.ru",
+    "password": "$2b$10$NMKCPGl3eCxRmQs8TfufMeigq9IZSnNZTnzcz51qT.yJpGYcThvaa"
   }
 ]

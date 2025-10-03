@@ -312,6 +312,7 @@ class ExpensesServices {
     }
 
     const resultData = JSON.stringify(parseDataByYear);
+    // const resultData = parseDataByYear;
 
     // Сохраняем новые данные
     await fs.writeFile(pathFile, resultData);

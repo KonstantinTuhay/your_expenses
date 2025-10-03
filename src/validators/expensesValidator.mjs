@@ -8,9 +8,9 @@ const isYearValid = (value) => {
 };
 
 const isDateValid = (value) => {
-  const valueValidLength = value.query.date.split(".").length;
+  const valueValidLength = value.split(".").length;
 
-  if (typeof value.query.date === "string" && valueValidLength === 2) {
+  if (typeof value === "string" && valueValidLength === 2) {
     return true;
   }
   return false;
@@ -49,7 +49,7 @@ export const validateData = [
 
 export const validateDeleteRequest = [
   query("date").custom(isDateValid).withMessage("Неверная дата"),
-  body("id").isInt(),
+  query("id").custom(isValidateString).withMessage("Неверного типа данных"),
 ];
 
 export const validateBody = [
