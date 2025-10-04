@@ -1,7 +1,4 @@
-import supertest from "supertest";
-import { app } from "../app.mjs";
-
-const request = supertest(app);
+import { request } from "./setupTest.js";
 
 describe("POST /api/login", () => {
   //   it("должен вернуть 401, если не переданы верно данные", async () => {
@@ -14,7 +11,7 @@ describe("POST /api/login", () => {
   //     expect(res.status).toBe(401); // или 401, если сервер так возвращает
   //   });
 
-  it("должен вернуть 200 и массив строк (лет)", async () => {
+  it("должен вернуть 200 и токен", async () => {
     const allData = {
       email: "tuhai-k@mail.ru",
       password: "12345",

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/server.mjs",
     "dev": "nodemon src/server.mjs",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest --runInBand --detectOpenHandles"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --runInBand --detectOpenHandles --no-cache"
   },
   "keywords": [],
   "author": "",

@@ -1,7 +1,4 @@
-import supertest from "supertest";
-import { app } from "../app.mjs";
-
-const request = supertest(app);
+import { request } from "./setupTest.js";
 
 describe("GET /api/expenses/getYears", () => {
   it("должен вернуть 401, если не авторизован", async () => {
