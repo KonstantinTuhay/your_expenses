@@ -1,5 +1,5 @@
 import supertest from "supertest";
-import { app } from "../server.mjs";
+import { app } from "../app.mjs";
 
 const request = supertest(app);
 
